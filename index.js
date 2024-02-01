@@ -1,6 +1,6 @@
-const fs = require('fs');
-const inquirer = require('inquirer');
-const generateShape = require('.lib/utils/generateShape');
+const fs = require("fs");
+const inquirer = require("inquirer");
+const generateShape = require(".lib/utils/generateShape");
 
 const shapeResponse = generateShape.shapeResponse;
 const textResponse = generateShape.textResponse;
@@ -9,44 +9,38 @@ const generateLogo = generateShape.generateLogo;
 
 const prompt = inquirer.createPromptModule();
 
-
 const questions = [
   {
-    type: 'rawlist',
-        message: 'Please choose a shape',
-        name: 'shapePrompt',
-        choices: [
-            'Circle', 
-            'Square', 
-            'Triangle'
-        ]
-  },
-  
-  {
-    type: 'input',
-        message: 'Type up to three letters you want in your logo',
-        name: 'textPrompt',
-        default: 'SVG',
+    type: "rawlist",
+    message: "Please choose a shape",
+    name: "shapePrompt",
+    choices: ["Circle", "Square", "Triangle"],
   },
 
   {
-    type: 'input',
-        message: 'Please type a color or hex code for your shape',
-        name: 'shapeColorPrompt',
-        validate: (value) => !!value.trim() || 'Please choose a color or hex value',
+    type: "input",
+    message: "Type up to three letters you want in your logo",
+    name: "textPrompt",
+    default: "SVG",
   },
 
   {
-    type: 'input',
-        message: 'Please type a color or paste a hex value for your text',
-        name: 'textColorPrompt',
-        validate: (value) => !!value.trim() || 'Please choose a color or hex value',
+    type: "input",
+    message: "Please type a color or hex code for your shape",
+    name: "shapeColorPrompt",
+    validate: (value) => !!value.trim() || "Please choose a color or hex value",
   },
-]
 
-function init () {
-  prompt(questions)
-  .then(data => {
+  {
+    type: "input",
+    message: "Please type a color or paste a hex value for your text",
+    name: "textColorPrompt",
+    validate: (value) => !!value.trim() || "Please choose a color or hex value",
+  },
+];
+
+function init() {
+  prompt(questions).then((data) => {
     const shapeResponse = shapeResponse(data.shapePrompt);
     const textResponse = textResponse(data.textPrompt);
     const shapeColor = data.shapeColorPrompt;
@@ -55,7 +49,11 @@ function init () {
     const generateShape = createShape(shapeResponse);
 
     function populateShape() {
-      const populatedShape = new generateShape(shapeColor, textResponse, textColor);
+      const populatedShape = new generateShape(
+        shapeColor,
+        textResponse,
+        textColor
+      );
 
       return populatedShape;
     }
@@ -65,20 +63,20 @@ function init () {
     function writeToFile(filename, populatedShape) {
       const genLogo = generateLogo(populatedShape);
 
-      if (!fs.existsSync('./output')) {
-        fs.mkdirSync('./output')
+      if (!fs.existsSync("./output")) {
+        fs.mkdirSync("./output");
       }
 
-      fs.writeFileSync('./output/logo.svg', genLogo, err => {
+      fs.writeFileSync("./output/logo.svg", genLogo, (err) => {
         if (err) {
           console.error(err);
         }
-      })
+      });
     }
 
-    writeToFile('logo.svg', populatedShape)
-    console.log('Generated logo.svg');
-  })
-};
+    writeToFile("logo.svg", populatedShape);
+    console.log("Generated logo.svg");
+  });
+}
 
 init();
