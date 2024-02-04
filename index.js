@@ -2,6 +2,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const {Square, Circle, Triangle} = require('./lib/shape');
 
+// questions array for user inputs
 const questions = [
   {
     name: 'text',
@@ -27,6 +28,7 @@ const questions = [
   }
 ]
 
+// checks if user selection is === to Square, Circle, or Triangle & creates new instance of selected shape
 const procQuestions = (answer) => {
   let shape;
   if (answer.shape === 'Square') {
@@ -46,6 +48,7 @@ const procQuestions = (answer) => {
   writeToFile('output.svg', svgLogo);
 }
 
+// checks if directory already exists & if not creates new directory and writes data to file
 function writeToFile(fileName, data) {
   if (!fs.existsSync('./output')) {
     fs.mkdirSync('./output');
