@@ -7,7 +7,7 @@ In this challenge I used inquirer to prompt the user with questions to create an
 The user can answer pre-determined questions to generate an SVG logo.
 
 ## Screenshot
-![Screenshot of SVG Shape Generator]
+![Screenshot of SVG Shape Generator](./screenshots/SVG%20logo.mp4)
 
 ## Link
-[Link to GitHub repo]
+[Link to GitHub repo](https://github.com/ZacharyDOTpy/shape-generator)
