@@ -17,8 +17,8 @@ const questions = [
     name: 'shape',
     message: 'Pick the shape of your logo.',
     choices: [
-      'Circle',
       'Square',
+      'Circle',
       'Triangle'
     ]
   },
@@ -55,7 +55,7 @@ function writeToFile(fileName, data) {
   }
 
   fs.writeFileSync('./output/' + fileName, data);
-  console.log('File has been created at ./output/' + fileName);
+  console.log('File has been created');
 }
 
 inquirer.prompt(questions)
